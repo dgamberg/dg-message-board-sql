@@ -5,18 +5,20 @@ var path = require('path');
 var bodyParser = require('body-parser');
 
 var pg = require('pg');
-var connectionString = process.env.DATABASE_URL || 'postgres://localhost:5432/sql_lecture';
+var connectionString = process.env.DATABASE_URL || 'postgres://localhost:5432/message-board';
+//var connectionString = process.env.DATABASE_URL + "?ssl=true" || 'postgres://localhost:5432/message-board';
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({expanded: true}));
 
-// Get all the people information
+// Get all the messages information
 app.get('/data', function(req,res){
     var results = [];
 
     //SQL Query > SELECT data from table
     pg.connect(connectionString, function (err, client, done) {
-        var query = client.query("SELECT * FROM people ORDER BY name ASC");
+        var query = client.query("SELECT * FROM messages ORDER BY id DESC;");
+
 
         // Stream results back one row at a time, push into results array
         query.on('row', function (row) {
@@ -39,42 +41,36 @@ app.get('/data', function(req,res){
 // Add a new person
 app.post('/data', function(req,res){
     // pull the data off of the request
-    var addedPerson = {
-        "name" : req.body.peopleAdd,
-        "location" : req.body.locationAdd,
-        "animal" : req.body.animal,
-        "address" : req.body.address
+    var addedMessage = {
+        "name" : req.body.nameAdd,
+        "message" : req.body.messageAdd
+
     };
 
     pg.connect(connectionString, function (err, client) {
-        //SQL Query > Insert Data
-        //Uses prepared statements, the $1 and $2 are placeholder variables. PSQL then makes sure they are relatively safe values
-        //and then uses them when it executes the query.
-        client.query("INSERT INTO people (name, location, spirit_animal, address) VALUES ($1, $2, $3, $4) RETURNING id",
-            [addedPerson.name, addedPerson.location, addedPerson.animal, addedPerson.address],
-            function(err, result) {
-                if(err) {
-                    console.log("Error inserting data: ", err);
-                    res.send(false);
-                }
+        client.query("INSERT INTO messages (name, message) VALUES ($1, $2) RETURNING id",
+            [addedMessage.name, addedMessage.message],
+        function(err, result) {
+            if(err) {
+                console.log("Error inserting data: ", err);
+                res.send(false);
+            }
 
-                res.send(true);
-            });
-
+            res.send(true);
+        });
     });
-
 });
 
 app.delete('/data', function(req,res){
     console.log(req.body.id);
 
-    var personID = req.body.id;
+    var messageID = req.body.id;
 
     pg.connect(connectionString, function (err, client) {
         //SQL Query > Insert Data
         //Uses prepared statements, the $1 and $2 are placeholder variables. PSQL then makes sure they are relatively safe values
         //and then uses them when it executes the query.
-        client.query("DELETE FROM people WHERE id = $1", [personID],
+        client.query("DELETE FROM messages WHERE id = $1", [messageID],
             function(err, result) {
                 if(err) {
                     console.log("Error deleting row: ", err);
@@ -91,12 +87,12 @@ app.delete('/data', function(req,res){
 
 app.get("/find", function(req, res) {
     var results = [];
-    var personName = "%" + req.query.peopleSearch + "%";
+    var personName = "%" + req.query.messagesSearch + "%";
 
     //SQL Query > SELECT data from table
     pg.connect(connectionString, function (err, client, done) {
 
-        var query = client.query("SELECT * FROM people WHERE name ILIKE $1", [personName]);
+        var query = client.query("SELECT * FROM messages WHERE name ILIKE $1", [personName]);
 
         // Stream results back one row at a time, push into results array
         query.on('row', function (row) {

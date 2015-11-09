@@ -1,5 +1,5 @@
 {
-  "name": "Mongo_Lecture",
+  "name": "message-board-sql",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server/app.js"
   },
-  "author": "Scott Bromander",
+  "author": "Dave Gamberg",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.14.1",

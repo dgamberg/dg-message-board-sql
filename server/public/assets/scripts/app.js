@@ -7,25 +7,25 @@ $(document).ready(function(){
          values[field.name] = field.value;
       });
 
-      findPerson(values);
+       //findMessages(values);
    });
 
-   $("#addSomeone").submit(addSomeone);
-   $("#peopleContainer").on('click', '.delete', deletePerson);
+   $("#addMessage").submit(addMessage);
+   $("#messageContainer").on('click', '.delete', deleteMessage);
 
    getData();
 });
 
-function findPerson(values) {
-    $.ajax({
-        type: "GET",
-        url: "/find",
-        data: values,
-        success: function(data) {
-            updateDOM(data);
-        }
-    })
-}
+//function findMessages(values) {
+//    $.ajax({
+//        type: "GET",
+//        url: "/find",
+//        data: values,
+//        success: function(data) {
+//            updateDOM(data);
+//        }
+//    })
+//}
 
 function getData(){
    $.ajax({
@@ -37,7 +37,7 @@ function getData(){
    });
 }
 
-function addSomeone(){
+function addMessage(){
    event.preventDefault();
    var values = {};
 
@@ -49,16 +49,14 @@ function addSomeone(){
       type: "POST",
       url: "/data",
       data: values,
-      success: function(data){
+      success: function(){
          getData();
       }
    });
 }
 
-function deletePerson(){
+function deleteMessage(){
    var deletedId = {"id" : $(this).data("id")};
-
-   console.log("Meaningful Log: ", deletedId);
 
    $.ajax({
       type: "DELETE",
@@ -71,18 +69,16 @@ function deletePerson(){
 }
 
 function updateDOM(data){
-   $("#peopleContainer").empty();
+   $("#messageContainer").empty();
 
    for(var i = 0; i < data.length; i++){
       var el = "<div class='well col-md-3'>" +
                   "<p>" + data[i].name + "</p>" +
-                  "<p>" + data[i].location + "</p>" +
-                  "<p>" + data[i].spirit_animal + "</p>" +
-                  "<p>" + data[i].address + "</p>" +
+                  "<p>" + data[i].message + "</p>" +
                   "<button class='delete btn btn-danger' data-id='" +
                      data[i].id + "'>Delete</button>" +
                "</div>";
 
-      $("#peopleContainer").append(el);
+      $("#messageContainer").append(el);
    }
 }

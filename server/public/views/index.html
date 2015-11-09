@@ -10,21 +10,27 @@
     <script type="text/javascript" src="/assets/scripts/app.js"></script>
 </head>
 <body>
-    <p>What up Zeta?</p>
-    <form id="search">
-        <input type="text" id="peopleSearch" name="peopleSearch" placeholder="Enter name:">
-        <button id="submitSearch" class="btn btn-info">Submit</button>
-    </form>
+<section class="container">
 
-    <h1>ADD SOMEONE!</h1>
-    <form id="addSomeone">
-        <input type="text" id="peopleAdd" name="peopleAdd" placeholder="Enter Name">
-        <input type="text" id="locationAdd" name="locationAdd" placeholder="Enter Location">
-        <input type="text" id="animal" name="animal" placeholder="Enter Animal">
-        <input type="text" id="address" name="address" placeholder="Enter Address">
-        <button id="submitAdd" class="btn btn-info">Submit Person</button>
-    </form>
 
-    <div id="peopleContainer"></div>
+<header class="container">
+    <h1 class="main-heading-text">Zeta Message Board</h1>
+</header>
+    <form id="addMessage">
+        <section id="entryForm" class=" message-container">
+            <div  class="input-container">
+                <input class="form-input" type="text" id="nameAdd" name="nameAdd" placeholder="Enter Name">
+            </div>
+            <div  class="input-container">
+                <textarea class="form-input" type="text" id="messageAdd" name="messageAdd" placeholder="Enter Message" rows="5"></textarea>
+            </div>
+            <div  class="input-container">
+                <button id="submitAdd" class="btn btn-info">Add Message</button>
+            </div>
+        </section>
+    </form>
+    <div id="messageContainer"></div>
+
+</section>
 </body>
 </html>
