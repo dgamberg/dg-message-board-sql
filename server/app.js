@@ -5,8 +5,8 @@ var path = require('path');
 var bodyParser = require('body-parser');
 
 var pg = require('pg');
-//var connectionString = process.env.DATABASE_URL || 'postgres://localhost:5432/message-board';
-var connectionString = process.env.DATABASE_URL + "?ssl=true" || 'postgres://localhost:5432/message-board';
+var connectionString = process.env.DATABASE_URL || 'postgres://localhost:5432/message-board';
+//var connectionString = process.env.DATABASE_URL + "?ssl=true" || 'postgres://localhost:5432/message-board';
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({expanded: true}));
