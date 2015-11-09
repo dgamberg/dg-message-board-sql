@@ -38,6 +38,9 @@ app.get('/data', function(req,res){
     });
 });
 
+
+
+
 // Add a new person
 app.post('/data', function(req,res){
     // pull the data off of the request
@@ -110,6 +113,11 @@ app.get("/find", function(req, res) {
             console.log(err);
         }
     });
+});
+
+app.get("/admin", function(req,res){
+    var file = req.params[0] || "/views/admin.html";
+    res.sendFile(path.join(__dirname, "./public", file));
 });
 
 app.get("/*", function(req,res){

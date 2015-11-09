@@ -70,10 +70,9 @@ function updateDOM(data){
       var el = "<div class='message-container well'>" +
                   "<p class='message-name'>" + data[i].name + "</p>" +
                   "<p class='message-body'>" + data[i].message + "</p>" +
-                  "<button class='delete btn btn-danger' data-id='" +
-                     data[i].id + "'>Delete</button>" +
+                  //"<button class='delete btn btn-danger' data-id='" +
+                  //   data[i].id + "'>Delete</button>" +
                "</div>";
-
       $("#messageContainer").append(el);
    }
 }
