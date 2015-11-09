@@ -89,3 +89,6 @@ form#addSomeone {
 .button-container{
     float: right;
 }
+.button-plus-sign{
+    font-size: 18px;
+}
