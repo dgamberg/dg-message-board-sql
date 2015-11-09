@@ -65,9 +65,8 @@ app.post('/data', function(req,res){
 });
 
 app.delete('/data', function(req,res){
-    console.log(req.body.id);
-
     var messageID = req.body.id;
+    console.log(req);
 
     pg.connect(connectionString, function (err, client) {
         //SQL Query > Insert Data
@@ -77,9 +76,8 @@ app.delete('/data', function(req,res){
             function(err, result) {
                 if(err) {
                     console.log("Error deleting row: ", err);
-                    res.send(false)
+                    //res.send(false);
                 }
-
                 res.send(true);
             });
 
