@@ -10,22 +10,11 @@ $(document).ready(function(){
        //findMessages(values);
    });
 
-   $("#addMessage").submit(addMessage);
+   $("#addMessageForm").submit(addMessage);
    $("#messageContainer").on('click', '.delete', deleteMessage);
 
    getData();
 });
-
-//function findMessages(values) {
-//    $.ajax({
-//        type: "GET",
-//        url: "/find",
-//        data: values,
-//        success: function(data) {
-//            updateDOM(data);
-//        }
-//    })
-//}
 
 function getData(){
    $.ajax({
@@ -51,6 +40,7 @@ function addMessage(){
       data: values,
       success: function(){
          getData();
+         clearTheForm();
       }
    });
 }
@@ -64,17 +54,22 @@ function deleteMessage(){
       data: deletedId,
       success: function(data){
           getData();
+
       }
    })
+}
+function clearTheForm(){
+   $('#enterMessage').val("");
+   $('#enterFirstName').val("");
 }
 
 function updateDOM(data){
    $("#messageContainer").empty();
 
    for(var i = 0; i < data.length; i++){
-      var el = "<div class='well col-md-3'>" +
-                  "<p>" + data[i].name + "</p>" +
-                  "<p>" + data[i].message + "</p>" +
+      var el = "<div class='message-container well'>" +
+                  "<p class='message-name'>" + data[i].name + "</p>" +
+                  "<p class='message-body'>" + data[i].message + "</p>" +
                   "<button class='delete btn btn-danger' data-id='" +
                      data[i].id + "'>Delete</button>" +
                "</div>";

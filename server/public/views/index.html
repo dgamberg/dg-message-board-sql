@@ -5,27 +5,25 @@
     <title></title>
 
     <link rel="stylesheet" href="/vendors/bootstrap.min.css">
-
+    <link rel="stylesheet" href="/assets/styles/styles.css"/>
     <script type="text/javascript" src="/vendors/jquery.min.js"></script>
     <script type="text/javascript" src="/assets/scripts/app.js"></script>
 </head>
 <body>
 <section class="container">
-
-
-<header class="container">
-    <h1 class="main-heading-text">Zeta Message Board</h1>
-</header>
-    <form id="addMessage">
+    <header class="container">
+        <h1 class="main-heading-text">Zeta Message Board</h1>
+    </header>
+    <form id="addMessageForm">
         <section id="entryForm" class=" message-container">
-            <div  class="input-container">
-                <input class="form-input" type="text" id="nameAdd" name="nameAdd" placeholder="Enter Name">
+            <div class="input-container">
+                <input class="form-input" type="text" id="enterFirstName" name="enterFirstName" placeholder="Enter Your Name"/>
             </div>
-            <div  class="input-container">
-                <textarea class="form-input" type="text" id="messageAdd" name="messageAdd" placeholder="Enter Message" rows="5"></textarea>
+            <div class="text-area-container">
+                <textarea class="form-input" id="enterMessage" name="enterMessage" placeholder="Enter Your Message"></textarea>
             </div>
-            <div  class="input-container">
-                <button id="submitAdd" class="btn btn-info">Add Message</button>
+            <div class="button-container">
+                <button id="addMessageButton" class="btn btn-info">Add Message&nbsp;<span class="glyphicon glyphicon-plus"></span></button>
             </div>
         </section>
     </form>
