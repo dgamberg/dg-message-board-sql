@@ -47,7 +47,7 @@ function addMessage(){
 
 function deleteMessage(){
     var deletedId = {"id" : $(this).data("id")};
-    console.log(deletedId);
+
     $.ajax({
         type: "DELETE",
         url: "/data",
